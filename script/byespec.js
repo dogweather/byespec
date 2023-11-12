@@ -120,7 +120,7 @@ const byesig = (function () {
    * @param {import("vscode").TextEditor} editor
    */
   function isRubyFile(editor) {
-    return editor.document.languageId == "ruby";
+    return editor.document.languageId == "elixir";
   }
 
   async function showAndUnfoldSig() {
@@ -159,7 +159,7 @@ const byesig = (function () {
    * @param {import("vscode").TextDocument} textDoc
    */
   function onDidOpenTextDocument(textDoc) {
-    if (textDoc.languageId != 'ruby') return
+    if (textDoc.languageId != 'elixir') return
     if (knownDocuments[textDoc.fileName]) {
       knownDocuments[textDoc.fileName] += 1;
     } else {
@@ -171,7 +171,7 @@ const byesig = (function () {
    * @param {import("vscode").TextDocument} textDoc
    */
   function onDidCloseTextDocument(textDoc) {
-    if (textDoc.languageId != 'ruby') return
+    if (textDoc.languageId != 'elixir') return
     if (!knownDocuments[textDoc.fileName]) return;
 
     delete knownDocuments[textDoc.fileName];
