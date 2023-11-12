@@ -47,7 +47,7 @@ const byesig = (function () {
     if (temporaryDisable) return;
     let editor = vscode.window.activeTextEditor;
     if (!editor) return;
-    if (!isRubyFile(editor)) return;
+    if (!isElixirFile(editor)) return;
 
     let tile_key = genTileKey(editor);
     disposeHidingDecoration(tile_key);
@@ -70,7 +70,7 @@ const byesig = (function () {
     let editor = vscode.window.activeTextEditor;
     if (!editor) return;
 
-    if (!isRubyFile(editor)) return;
+    if (!isElixirFile(editor)) return;
     if (!force && !isNewlyOpened(editor.document.fileName)) return;
 
     // When switching active editor, it takes time for VSCode to establish a selection.
@@ -119,7 +119,7 @@ const byesig = (function () {
   /**
    * @param {import("vscode").TextEditor} editor
    */
-  function isRubyFile(editor) {
+  function isElixirFile(editor) {
     return editor.document.languageId == "elixir";
   }
 
