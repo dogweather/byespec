@@ -6,8 +6,8 @@ const byespec = (function () {
   const COMMAND_UNFOLD_ALL = 'editor.unfoldAll';
   // @FIXME: Don't match with empty block. Empty block is not foldable by default and as such, folding
   // will affect the parent block - which we do not want.
-  const RE_SIG_BLOCK = "^ *sig do$.*?^ *end\s*$";
-  const RE_SIG_LINE = "^ *sig {.*?}.*?$";
+  const RE_SIG_BLOCK = "^@spec.*$";
+  const RE_SIG_LINE = "^@spec.+$";
 
   const FORCE = true;
 
@@ -56,7 +56,7 @@ const byespec = (function () {
     if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
 
     editor.setDecorations(byespecDecorationType[tile_key], [
-      ...getMatchPositions(new RegExp(RE_SIG_BLOCK, "gsm"), editor),
+      // ...getMatchPositions(new RegExp(RE_SIG_BLOCK, "gsm"), editor),
       ...getMatchPositions(new RegExp(RE_SIG_LINE, "gsm"), editor)
     ]);
   }
