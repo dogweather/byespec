@@ -19,14 +19,14 @@ const byespec = (function () {
 
   let knownDocuments = {};
 
-  function delayedHideSig() {
+  function delayedHideSpec() {
     if (hideDelayTimeout) clearTimeout(hideDelayTimeout);
-    hideDelayTimeout = setTimeout(hideSig, DELAY_TIMEOUT_MS);
+    hideDelayTimeout = setTimeout(hideSpec, DELAY_TIMEOUT_MS);
   }
 
-  async function hideAndFoldSig(force = false) {
-    hideSig();
-    await foldSig(force);
+  async function hideAndFoldSpec(force = false) {
+    hideSpec();
+    await foldSpec(force);
   }
 
   function decorationRenderOption() {
@@ -43,7 +43,7 @@ const byespec = (function () {
     return decoration;
   }
 
-  function hideSig() {
+  function hideSpec() {
     if (temporaryDisable) return;
     let editor = vscode.window.activeTextEditor;
     if (!editor) return;
@@ -61,7 +61,7 @@ const byespec = (function () {
     ]);
   }
 
-  async function foldSig(force = false) {
+  async function foldSpec(force = false) {
     if (!vscode.workspace.getConfiguration('byespec').get('fold')) return;
     if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
 
@@ -123,7 +123,7 @@ const byespec = (function () {
     return editor.document.languageId == "elixir";
   }
 
-  async function showAndUnfoldSig() {
+  async function showAndUnfoldSpec() {
     disposeAllHidingDecoration();
     if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
     await vscode.commands.executeCommand(COMMAND_UNFOLD_ALL);
@@ -145,14 +145,14 @@ const byespec = (function () {
     delete byespecDecorationType[key];
   }
 
-  function onCommandHideAndFoldSig() {
+  function onCommandHideAndFoldSpec() {
     temporaryDisable = false;
-    hideAndFoldSig(FORCE);
+    hideAndFoldSpec(FORCE);
   }
 
-  function onCommandShowAndUnfoldSig() {
+  function onCommandShowAndUnfoldSpec() {
     temporaryDisable = true;
-    showAndUnfoldSig();
+    showAndUnfoldSpec();
   }
 
   /**
@@ -195,14 +195,14 @@ const byespec = (function () {
    * @param {{ subscriptions: import("vscode").Disposable[]; }} context
    */
   function activate(context) {
-    context.subscriptions.push(vscode.commands.registerCommand('byespec.hideSig', onCommandHideAndFoldSig));
-    context.subscriptions.push(vscode.commands.registerCommand('byespec.showSig', onCommandShowAndUnfoldSig));
-    vscode.window.onDidChangeActiveTextEditor(() => { hideAndFoldSig(); }, null, context.subscriptions);
-    vscode.workspace.onDidChangeTextDocument(delayedHideSig, null, context.subscriptions);
+    context.subscriptions.push(vscode.commands.registerCommand('byespec.hideSpec', onCommandHideAndFoldSpec));
+    context.subscriptions.push(vscode.commands.registerCommand('byespec.showSpec', onCommandShowAndUnfoldSpec));
+    vscode.window.onDidChangeActiveTextEditor(() => { hideAndFoldSpec(); }, null, context.subscriptions);
+    vscode.workspace.onDidChangeTextDocument(delayedHideSpec, null, context.subscriptions);
     vscode.workspace.onDidOpenTextDocument(onDidOpenTextDocument, null, context.subscriptions);
     vscode.workspace.onDidCloseTextDocument(onDidCloseTextDocument, null, context.subscriptions);
 
-    if (vscode.window.activeTextEditor) hideAndFoldSig();
+    if (vscode.window.activeTextEditor) hideAndFoldSpec();
   }
 
   return { activate: activate };

@@ -22,11 +22,11 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "byespec.hideSig",
+				"command": "byespec.hideSpec",
 				"title": "ByeSpec: hide Specs"
 			},
 			{
-				"command": "byespec.showSig",
+				"command": "byespec.showSpec",
 				"title": "ByeSpec: show Specs"
 			}
 		],
