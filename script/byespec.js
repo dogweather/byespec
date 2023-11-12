@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 const path = require('path');
 
-const byesig = (function () {
+const byespec = (function () {
   const COMMAND_FOLD = 'editor.fold';
   const COMMAND_UNFOLD_ALL = 'editor.unfoldAll';
   // @FIXME: Don't match with empty block. Empty block is not foldable by default and as such, folding
@@ -14,7 +14,7 @@ const byesig = (function () {
   let hideDelayTimeout;
   const DELAY_TIMEOUT_MS = 200;
 
-  let byesigDecorationType = {};
+  let byespecDecorationType = {};
   let temporaryDisable = false;
 
   let knownDocuments = {};
@@ -31,11 +31,11 @@ const byesig = (function () {
 
   function decorationRenderOption() {
     let decoration = {
-      opacity: vscode.workspace.getConfiguration('byesig').get('opacity').toString(),
-      backgroundColor: vscode.workspace.getConfiguration('byesig').get('backgroundColor'),
+      opacity: vscode.workspace.getConfiguration('byespec').get('opacity').toString(),
+      backgroundColor: vscode.workspace.getConfiguration('byespec').get('backgroundColor'),
     };
 
-    if (vscode.workspace.getConfiguration('byesig').get('showIcon')) {
+    if (vscode.workspace.getConfiguration('byespec').get('showIcon')) {
       decoration['gutterIconPath'] = path.join(__dirname, '..', 'misc', 'icon.png');
       decoration['gutterIconSize'] = "contain";
     }
@@ -51,19 +51,19 @@ const byesig = (function () {
 
     let tile_key = genTileKey(editor);
     disposeHidingDecoration(tile_key);
-    byesigDecorationType[tile_key] = vscode.window.createTextEditorDecorationType(decorationRenderOption());
+    byespecDecorationType[tile_key] = vscode.window.createTextEditorDecorationType(decorationRenderOption());
 
-    if (!vscode.workspace.getConfiguration('byesig').get('enabled')) return;
+    if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
 
-    editor.setDecorations(byesigDecorationType[tile_key], [
+    editor.setDecorations(byespecDecorationType[tile_key], [
       ...getMatchPositions(new RegExp(RE_SIG_BLOCK, "gsm"), editor),
       ...getMatchPositions(new RegExp(RE_SIG_LINE, "gsm"), editor)
     ]);
   }
 
   async function foldSig(force = false) {
-    if (!vscode.workspace.getConfiguration('byesig').get('fold')) return;
-    if (!vscode.workspace.getConfiguration('byesig').get('enabled')) return;
+    if (!vscode.workspace.getConfiguration('byespec').get('fold')) return;
+    if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
 
     if (temporaryDisable) return;
 
@@ -125,12 +125,12 @@ const byesig = (function () {
 
   async function showAndUnfoldSig() {
     disposeAllHidingDecoration();
-    if (!vscode.workspace.getConfiguration('byesig').get('enabled')) return;
+    if (!vscode.workspace.getConfiguration('byespec').get('enabled')) return;
     await vscode.commands.executeCommand(COMMAND_UNFOLD_ALL);
   }
 
   function disposeAllHidingDecoration() {
-    for (let key in byesigDecorationType) {
+    for (let key in byespecDecorationType) {
       disposeHidingDecoration(key);
     }
   }
@@ -139,10 +139,10 @@ const byesig = (function () {
    * @param {string} key
    */
   function disposeHidingDecoration(key) {
-    if (!byesigDecorationType[key]) return;
+    if (!byespecDecorationType[key]) return;
 
-    byesigDecorationType[key].dispose();
-    delete byesigDecorationType[key];
+    byespecDecorationType[key].dispose();
+    delete byespecDecorationType[key];
   }
 
   function onCommandHideAndFoldSig() {
@@ -195,8 +195,8 @@ const byesig = (function () {
    * @param {{ subscriptions: import("vscode").Disposable[]; }} context
    */
   function activate(context) {
-    context.subscriptions.push(vscode.commands.registerCommand('byesig.hideSig', onCommandHideAndFoldSig));
-    context.subscriptions.push(vscode.commands.registerCommand('byesig.showSig', onCommandShowAndUnfoldSig));
+    context.subscriptions.push(vscode.commands.registerCommand('byespec.hideSig', onCommandHideAndFoldSig));
+    context.subscriptions.push(vscode.commands.registerCommand('byespec.showSig', onCommandShowAndUnfoldSig));
     vscode.window.onDidChangeActiveTextEditor(() => { hideAndFoldSig(); }, null, context.subscriptions);
     vscode.workspace.onDidChangeTextDocument(delayedHideSig, null, context.subscriptions);
     vscode.workspace.onDidOpenTextDocument(onDidOpenTextDocument, null, context.subscriptions);
@@ -208,4 +208,4 @@ const byesig = (function () {
   return { activate: activate };
 })();
 
-module.exports = byesig;
+module.exports = byespec;
