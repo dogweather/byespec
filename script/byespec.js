@@ -7,7 +7,7 @@ const byespec = (function () {
   // @FIXME: Don't match with empty block. Empty block is not foldable by default and as such, folding
   // will affect the parent block - which we do not want.
   const RE_SIG_BLOCK = "no-match";
-  const RE_SIG_LINE  = "^ *@spec .+::.+$";
+  const RE_SIG_LINE  = "^ *@spec .+$";
 
   const FORCE = true;
 
