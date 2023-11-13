@@ -51,7 +51,7 @@
 				"byespec.opacity": {
 					"type": "number",
 					"description": "Opacity of the spec area (0: transparent, 1: opaque)",
-					"default": 0.5
+					"default": 0.4
 				},
 				"byespec.showIcon": {
 					"type": "boolean",
