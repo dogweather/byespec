@@ -41,7 +41,7 @@
 				"byespec.fold": {
 					"type": "boolean",
 					"description": "Fold (collapse) spec blocks",
-					"default": true
+					"default": false
 				},
 				"byespec.backgroundColor": {
 					"type": "string",

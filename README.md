@@ -2,7 +2,7 @@
 
 > This is my first VS Code extension. I have no idea what I'm doing. 😅
 
-ByeSpec is a VSCode plugin to dim or hide Specs in Elixir source files.
+ByeSpec is a VSCode plugin to dim or hide @specs in Elixir source files.
 
 When active it fades Elixir `@spec` lines:
 
@@ -28,7 +28,7 @@ This is a fork of [byesig for Ruby with Sorbet](https://github.com/itarato/byesi
   - opacity
   - backgroundColor
   - plugin on/off
-  - fold on/off
+  - fold on/off (Doesn't work too well at the moment)
   - gutter icon on/off
 
 ## Contribution
