@@ -1,13 +1,13 @@
 {
 	"name": "byespec",
 	"displayName": "byespec",
-	"description": "Dims Elixir Spec signatures in VS Code source files. Just makes them a little less prominent.",
+	"description": "Dims Elixir Spec signatures in VS Code source files. Hide them altogether or just make them a little less prominent.",
 	"publisher": "dogweather",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/dogweather/byespec"
 	},
-	"version": "0.0.16",
+	"version": "1.0.0",
 	"icon": "misc/byespec-icon.jpeg",
 	"engines": {
 		"vscode": "^1.40.0"
@@ -41,7 +41,7 @@
 				"byespec.fold": {
 					"type": "boolean",
 					"description": "Fold (collapse) spec blocks",
-					"default": true
+					"default": false
 				},
 				"byespec.backgroundColor": {
 					"type": "string",
@@ -51,7 +51,7 @@
 				"byespec.opacity": {
 					"type": "number",
 					"description": "Opacity of the spec area (0: transparent, 1: opaque)",
-					"default": 0.5
+					"default": 0.4
 				},
 				"byespec.showIcon": {
 					"type": "boolean",
