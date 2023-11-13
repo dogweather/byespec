@@ -1,13 +1,13 @@
 {
 	"name": "byespec",
 	"displayName": "byespec",
-	"description": "Dims Elixir Spec signatures in VS Code source files. Just makes them a little less prominent.",
+	"description": "Dims Elixir Spec signatures in VS Code source files. Hide them altogether or just make them a little less prominent.",
 	"publisher": "dogweather",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/dogweather/byespec"
 	},
-	"version": "0.0.18",
+	"version": "1.0.0",
 	"icon": "misc/byespec-icon.jpeg",
 	"engines": {
 		"vscode": "^1.40.0"
